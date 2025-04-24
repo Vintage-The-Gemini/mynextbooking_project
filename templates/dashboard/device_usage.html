@@ -1,0 +1,103 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Device Usage by Service{% endblock %}
+
+{% block header %}Device Usage by Service{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Key Findings</h5>
+            </div>
+            <div class="card-body">
+                <p class="lead">Different services show distinct device usage patterns among users.</p>
+                <p>Desktop is the preferred platform for MMT and YATRA, while iOS is most popular for GOIBIBO bookings.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-header">
+                <h5>Device Usage Chart</h5>
+            </div>
+            <div class="card-body text-center">
+                <div class="chart-container"><img src="data:image/png;base64,{{ plot_data }}" class="img-fluid" alt="Device Usage by Service"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-header">
+                <h5>Most Used Devices by Service</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive"><table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Most Used Device</th>
+                            <th>Bookings</th>
+                            <th>Percentage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in device_data %}
+                        <tr>
+                            <td>{{ item.service }}</td>
+                            <td>{{ item.device }}</td>
+                            <td>{{ item.count }}</td>
+                            <td>{{ item.percentage }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Device Usage Analysis</h5>
+            </div>
+            <div class="card-body">
+                <p>The device usage patterns reveal important insights about user preferences across different services:</p>
+                
+                <ul>
+                    <li><strong>MMT:</strong> Desktop dominates (62.5%), suggesting users prefer larger screens for this service.</li>
+                    <li><strong>YATRA:</strong> Desktop leads (48.6%), but with a more balanced distribution across devices.</li>
+                    <li><strong>GOIBIBO:</strong> iOS (37.6%) is most popular, indicating a strong mobile focus among this service's users.</li>
+                </ul>
+                
+                <p>These differences may reflect variations in user interface quality, target demographics, or marketing approaches across the services.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Business Recommendations</h5>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li>Optimize the MMT experience specifically for desktop users, focusing on detailed comparison features.</li>
+                    <li>Enhance the GOIBIBO mobile experience, particularly for iOS users.</li>
+                    <li>Consider device-specific promotions (e.g., mobile-only discounts for GOIBIBO).</li>
+                    <li>Identify opportunities to improve underperforming platforms (e.g., MMT's mobile experience).</li>
+                    <li>Analyze the relationship between device usage and booking value to identify high-value customer segments.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

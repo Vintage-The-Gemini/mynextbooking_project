@@ -1,0 +1,78 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Most Booked Routes{% endblock %}
+
+{% block header %}Most Booked Routes for Frequent Customers{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Key Findings</h5>
+            </div>
+            <div class="card-body">
+                <p class="lead">We identified <strong>{{ frequent_customers_count }}</strong> customers who made multiple bookings.</p>
+                <p>The most popular route among these frequent customers is <strong>{{ most_booked_route }}</strong> with <strong>{{ most_booked_count }}</strong> bookings.</p>
+                <p>This insight helps identify popular routes for loyal customers and can guide targeted marketing campaigns.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-header">
+                <h5>Top Routes Chart</h5>
+            </div>
+            <div class="card-body text-center">
+                <div class="chart-container"><img src="data:image/png;base64,{{ plot_data }}" class="img-fluid" alt="Top Booked Routes"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-header">
+                <h5>Top Routes for Frequent Customers</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive"><table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Route</th>
+                            <th>Number of Bookings</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in route_data %}
+                        <tr {% if item.route == most_booked_route %}class="table-primary"{% endif %}>
+                            <td>{{ item.route }}</td>
+                            <td>{{ item.count }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Business Recommendations</h5>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li>Create special offers for the Gurgaon to Roissy-en-France route to reward frequent travelers.</li>
+                    <li>Consider loyalty programs targeting customers who frequently travel on the top 5 routes.</li>
+                    <li>Explore partnerships with hotels and local businesses at popular destinations like Roissy-en-France.</li>
+                    <li>Analyze why certain routes are more popular among repeat customers to identify service advantages.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

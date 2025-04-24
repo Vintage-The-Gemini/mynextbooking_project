@@ -1,0 +1,124 @@
+{% extends 'dashboard/base.html' %}
+{% load dashboard_filters %}
+
+{% block title %}Quarterly Booking Trends{% endblock %}
+
+{% block header %}Quarterly Booking Trends by Device Type{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Key Findings</h5>
+            </div>
+            <div class="card-body">
+                <p class="lead">Booking patterns show clear quarterly trends with significant changes over time.</p>
+                <p>2020-Q1 had the highest booking volume across most device types, followed by a significant decline in Q2 (likely due to COVID-19).</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Quarterly Trends Chart</h5>
+            </div>
+            <div class="card-body text-center">
+                <div class="chart-container"><img src="data:image/png;base64,{{ plot_data }}" class="img-fluid" alt="Quarterly Booking Trends"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Quarterly Booking Data by Device Type</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th>Quarter</th>
+                                {% for device in device_types %}
+                                <th>{{ device }}</th>
+                                {% endfor %}
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for quarter in quarter_data %}
+                            <tr>
+                                <td>{{ quarter.quarter }}</td>
+                                {% for device in device_types %}
+                                <td>{{ quarter|get_item:device }}</td>
+                                {% endfor %}
+                                <td>
+                                    {% with total=0 %}
+                                        {% for device in device_types %}
+                                            {% with device_count=quarter|get_item:device %}
+                                                {% if device_count %}
+                                                    {% with total=total|add:device_count %}
+                                                        {% if forloop.last %}
+                                                            {{ total }}
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                {% endif %}
+                                            {% endwith %}
+                                        {% endfor %}
+                                    {% endwith %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Key Observations</h5>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li><strong>Desktop & iOS Growth:</strong> These platforms show the strongest growth across most quarters.</li>
+                    <li><strong>COVID-19 Impact:</strong> 2020-Q2 shows a dramatic decline in bookings across all devices.</li>
+                    <li><strong>Recovery Pattern:</strong> The recovery from 2020-Q3 onward shows different patterns by device.</li>
+                    <li><strong>Mobile Trend:</strong> iOS and Android bookings have grown significantly in later periods.</li>
+                    <li><strong>Tablet Decline:</strong> Tablet usage for bookings has decreased over time.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Business Recommendations</h5>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li>Focus platform development on Desktop and iOS which consistently show higher booking volumes.</li>
+                    <li>Consider seasonal marketing strategies based on quarterly booking patterns.</li>
+                    <li>Analyze the factors behind the 2021-Q4 iOS spike to replicate success.</li>
+                    <li>Reconsider investment in tablet optimization given the declining usage.</li>
+                    <li>Create quarterly forecasting models to anticipate booking volumes by device type.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

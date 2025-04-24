@@ -1,0 +1,154 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}MyNextBooking Dashboard Overview{% endblock %}
+
+{% block header %}Dashboard Overview{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Summary Statistics</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card text-center bg-primary text-white mb-3">
+                            <div class="card-body stat-card">
+                                <h2 class="number">{{ distinct_bookings }}</h2>
+                                <p class="label">Total Bookings</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center bg-success text-white mb-3">
+                            <div class="card-body stat-card">
+                                <h2 class="number">{{ distinct_sessions }}</h2>
+                                <p class="label">Total Sessions</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center bg-info text-white mb-3">
+                            <div class="card-body stat-card">
+                                <h2 class="number">{{ distinct_searches }}</h2>
+                                <p class="label">Total Searches</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center bg-warning text-white mb-3">
+                            <div class="card-body stat-card">
+                                <h2 class="number">{{ conversion_rate|floatformat:2 }}%</h2>
+                                <p class="label">Conversion Rate</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <div class="card text-center mb-3">
+                            <div class="card-body stat-card">
+                                <h2 class="number">{{ sessions_with_multiple_bookings }}</h2>
+                                <p class="label">Sessions with Multiple Bookings</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Key Insights</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <a href="{% url 'bookings_by_day' %}" class="text-decoration-none">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h5>Bookings by Day of Week</h5>
+                                    <p class="text-muted">Thursday has the highest number of bookings</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a href="{% url 'service_performance' %}" class="text-decoration-none">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h5>Service Performance</h5>
+                                    <p class="text-muted">GOIBIBO is the most popular service</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a href="{% url 'most_booked_routes' %}" class="text-decoration-none">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h5>Most Booked Routes</h5>
+                                    <p class="text-muted">Top route is Gurgaon to Roissy-en-France</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <a href="{% url 'advance_booking_cities' %}" class="text-decoration-none">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h5>Advance Booking Cities</h5>
+                                    <p class="text-muted">Bālāpur has longest advance bookings</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a href="{% url 'correlation_analysis' %}" class="text-decoration-none">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h5>Correlation Analysis</h5>
+                                    <p class="text-muted">Price correlates with distance</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a href="{% url 'device_usage' %}" class="text-decoration-none">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h5>Device Usage</h5>
+                                    <p class="text-muted">Desktop is most popular for MMT & YATRA</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>About MyNextBooking</h5>
+            </div>
+            <div class="card-body">
+                <p>MyNextBooking is an Indian start-up that aggregates travel booking platforms (Yatra, MMT, Goibibo), 
+                helping users compare prices for upcoming journeys. This dashboard analyzes booking patterns, 
+                user behavior, and platform performance to provide actionable insights for business decision-making.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

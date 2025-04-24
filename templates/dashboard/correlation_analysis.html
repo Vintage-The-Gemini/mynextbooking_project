@@ -1,0 +1,93 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Correlation Analysis{% endblock %}
+
+{% block header %}Numerical Variable Correlation Analysis{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Key Findings</h5>
+            </div>
+            <div class="card-body">
+                <p class="lead">The strongest correlation ({{ max_corr_value }}) exists between <strong>{{ max_corr_var1 }}</strong> and <strong>{{ max_corr_var2 }}</strong>.</p>
+                <p>This indicates that longer travel distances typically result in higher booking prices, which aligns with industry standards.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-header">
+                <h5>Correlation Heatmap</h5>
+            </div>
+            <div class="card-body text-center">
+                <div class="chart-container"><img src="data:image/png;base64,{{ plot_data }}" class="img-fluid" alt="Correlation Heatmap"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-header">
+                <h5>Understanding Correlations</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Color Interpretation:</strong></p>
+                <ul>
+                    <li><span class="text-danger">Red (positive correlation)</span>: Variables move in the same direction</li>
+                    <li><span class="text-primary">Blue (negative correlation)</span>: Variables move in opposite directions</li>
+                    <li>Darker colors indicate stronger correlations</li>
+                </ul>
+                
+                <p><strong>Correlation Strength:</strong></p>
+                <ul>
+                    <li>0.0 - 0.3: Weak correlation</li>
+                    <li>0.3 - 0.5: Moderate correlation</li>
+                    <li>0.5 - 0.7: Strong correlation</li>
+                    <li>0.7 - 1.0: Very strong correlation</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Key Correlations Explained</h5>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li><strong>INR_Amount & distance_km ({{ max_corr_value }}):</strong> The price increases with travel distance, which is expected in the travel industry.</li>
+                    <li><strong>INR_Amount & no_of_passengers (0.397):</strong> Moderate correlation as more passengers typically means higher booking value.</li>
+                    <li><strong>INR_Amount & days_to_departure (0.285):</strong> Weak to moderate correlation suggesting advance bookings may be slightly more expensive on average.</li>
+                    <li><strong>days_to_departure & distance_km (0.217):</strong> Weak correlation indicating people tend to book slightly earlier for longer journeys.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Business Recommendations</h5>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li>Leverage the price-distance relationship in marketing by highlighting value for longer journeys.</li>
+                    <li>Consider group discounts since bookings with more passengers already generate higher revenue.</li>
+                    <li>Develop targeted pricing strategies based on booking time and distance correlations.</li>
+                    <li>Monitor these correlations over time to detect changes in customer behavior patterns.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

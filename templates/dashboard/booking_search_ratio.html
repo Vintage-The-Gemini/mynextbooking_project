@@ -1,0 +1,138 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Booking to Search Ratio Analysis{% endblock %}
+
+{% block header %}Booking to Search Ratio (oBSR) Analysis{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Key Findings</h5>
+            </div>
+            <div class="card-body">
+                <p class="lead">The Booking to Search Ratio (oBSR) measures conversion effectiveness - how many searches result in actual bookings.</p>
+                <p>June has the highest monthly conversion rate, while Tuesday shows the strongest performance by day of week.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>oBSR Time Series</h5>
+            </div>
+            <div class="card-body text-center">
+                <div class="chart-container"><img src="data:image/png;base64,{{ ts_plot_data }}" class="img-fluid" alt="oBSR Time Series"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Average oBSR by Month</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="table-responsive"><table class="table table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Month</th>
+                                    <th>oBSR</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in monthly_data %}
+                                <tr>
+                                    <td>{{ item.month }}</td>
+                                    <td>{{ item.ratio }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="chart-container"><img src="data:image/png;base64,{{ monthly_plot_data }}" class="img-fluid" alt="Monthly oBSR"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Average oBSR by Day of Week</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="table-responsive"><table class="table table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Day</th>
+                                    <th>oBSR</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in day_data %}
+                                <tr>
+                                    <td>{{ item.day }}</td>
+                                    <td>{{ item.ratio }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="chart-container"><img src="data:image/png;base64,{{ day_plot_data }}" class="img-fluid" alt="Day of Week oBSR"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>oBSR Insights</h5>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li><strong>Highest Monthly Conversion:</strong> June (0.6838) - This could be related to summer vacation planning.</li>
+                    <li><strong>Lowest Monthly Conversion:</strong> July (0.3384) - This might be due to browsing behavior without immediate booking intent.</li>
+                    <li><strong>Highest Day Conversion:</strong> Tuesday (0.5858) - Mid-week appears to be when users are most decisive.</li>
+                    <li><strong>Lowest Day Conversion:</strong> Wednesday (0.4438) - This shows a significant drop from Tuesday's peak.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Business Recommendations</h5>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li>Optimize search results and UI during high-conversion periods (June, Tuesday) to capitalize on user decisiveness.</li>
+                    <li>Implement targeted interventions during low-conversion periods (July, Wednesday) such as limited-time offers.</li>
+                    <li>Analyze the user experience factors that contribute to higher conversion on Tuesdays.</li>
+                    <li>Consider timing marketing campaigns to align with seasonal conversion patterns.</li>
+                    <li>Set conversion rate targets based on historical monthly and daily patterns.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

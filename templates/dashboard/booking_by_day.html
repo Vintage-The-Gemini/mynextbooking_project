@@ -1,0 +1,77 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Bookings by Day of Week{% endblock %}
+
+{% block header %}Bookings by Day of Week{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Key Findings</h5>
+            </div>
+            <div class="card-body">
+                <p class="lead"><strong>{{ max_day }}</strong> has the highest number of bookings with <strong>{{ max_bookings }}</strong> bookings.</p>
+                <p>This insight can be used to optimize marketing campaigns, customer support staffing, and special offers.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Pie Chart: Bookings by Day of Week</h5>
+            </div>
+            <div class="card-body text-center">
+                <div class="chart-container"><img src="data:image/png;base64,{{ plot_data }}" class="img-fluid" alt="Bookings by Day of Week"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Booking Counts by Day</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive"><table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Day of Week</th>
+                            <th>Number of Bookings</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in day_data %}
+                        <tr {% if item.day == max_day %}class="table-primary"{% endif %}>
+                            <td>{{ item.day }}</td>
+                            <td>{{ item.bookings }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Business Recommendations</h5>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li>Consider running promotional offers on slower days (Wednesday, Sunday) to even out booking distribution.</li>
+                    <li>Schedule maintenance and updates during off-peak hours on slower booking days.</li>
+                    <li>Ensure adequate customer support staffing on Thursday, when booking volume is highest.</li>
+                    <li>Target marketing campaigns to capitalize on peak booking days (Thursday, Tuesday).</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

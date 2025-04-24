@@ -1,0 +1,79 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Advance Booking Cities{% endblock %}
+
+{% block header %}Top Cities for Advance Bookings{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Key Findings</h5>
+            </div>
+            <div class="card-body">
+                <p class="lead">Travelers departing from <strong>Bālāpur</strong> book their trips furthest in advance (average 46.17 days).</p>
+                <p>Understanding advance booking patterns helps optimize inventory management and pricing strategies.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-header">
+                <h5>Advance Booking Chart</h5>
+            </div>
+            <div class="card-body text-center">
+                <div class="chart-container"><img src="data:image/png;base64,{{ plot_data }}" class="img-fluid" alt="Top Cities for Advance Bookings"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-header">
+                <h5>Advance Booking Cities Data</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive"><table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>City</th>
+                            <th>Avg. Days Before Departure</th>
+                            <th>Number of Departures</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in city_data %}
+                        <tr>
+                            <td>{{ item.city }}</td>
+                            <td>{{ item.avg_days }}</td>
+                            <td>{{ item.num_departures }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Business Recommendations</h5>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li>Implement dynamic pricing strategies for cities with longer advance booking windows.</li>
+                    <li>For cities with shorter booking windows (< 15 days), create last-minute deal promotions.</li>
+                    <li>Target early-bird promotions to travelers from Bālāpur, Devanhalli, and Chennai.</li>
+                    <li>Analyze the reasons for advance booking patterns in these cities (business travel, seasonal events, etc.).</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

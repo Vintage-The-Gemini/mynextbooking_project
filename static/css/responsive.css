@@ -1,0 +1,164 @@
+/* Responsive CSS for MyNextBooking Dashboard */
+
+/* Base styles */
+body {
+  font-size: 16px;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar for sidebar */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+/* Card styles */
+.card {
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Chart container */
+.chart-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  min-height: 300px;
+}
+
+.chart-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Table styles for mobile */
+.table-responsive {
+  overflow-x: auto;
+}
+
+/* Hamburger menu for mobile */
+.navbar-toggler {
+  display: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 10px;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1050;
+}
+
+.navbar-toggler-icon {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: middle;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.5%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  background-size: 100% 100%;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 991.98px) {
+  .sidebar {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    transition: all 0.3s ease;
+    z-index: 1040;
+    overflow-y: auto;
+    padding-top: 60px;
+  }
+  
+  .sidebar.show {
+    left: 0;
+  }
+  
+  .main-content {
+    margin-left: 0;
+    padding: 20px;
+  }
+  
+  .navbar-toggler {
+    display: block;
+  }
+  
+  /* Ensure charts are responsive */
+  .chart-container {
+    min-height: 200px;
+  }
+  
+  /* Adjust card columns */
+  .row .col-md-3,
+  .row .col-md-4,
+  .row .col-md-6,
+  .row .col-md-5,
+  .row .col-md-7 {
+    margin-bottom: 15px;
+  }
+  
+  /* Adjust stat cards for smaller screens */
+  .stat-card .number {
+    font-size: 1.5rem;
+  }
+  
+  /* Make sure images don't overflow */
+  img.img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 575.98px) {
+  body {
+    font-size: 14px;
+  }
+  
+  .card-header h5 {
+    font-size: 1rem;
+  }
+  
+  .card-body {
+    padding: 0.75rem;
+  }
+  
+  .stat-card .number {
+    font-size: 1.25rem;
+  }
+  
+  .stat-card .label {
+    font-size: 0.8rem;
+  }
+  
+  /* Extra padding for main content when sidebar is hidden */
+  .main-content {
+    padding-top: 50px;
+  }
+}
+
+/* Overlay when mobile menu is open */
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1030;
+}
+
+.sidebar-backdrop.show {
+  display: block;
+}

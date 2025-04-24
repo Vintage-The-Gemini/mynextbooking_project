@@ -1,0 +1,107 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Service Performance Analysis{% endblock %}
+
+{% block header %}Service Performance Analysis{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Key Findings</h5>
+            </div>
+            <div class="card-body">
+                <p class="lead">GOIBIBO dominates the platform with the highest number of bookings and gross booking value.</p>
+                <p>Understanding the performance of each service helps in developing strategic partnerships and focused marketing efforts.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-header">
+                <h5>Service Performance Chart</h5>
+            </div>
+            <div class="card-body text-center">
+                <div class="chart-container"><img src="data:image/png;base64,{{ plot_data }}" class="img-fluid" alt="Service Performance"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-header">
+                <h5>Service Performance Metrics</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive"><table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Service Name</th>
+                            <th>Total Bookings</th>
+                            <th>Total GBV</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in service_data %}
+                        <tr>
+                            <td>{{ item.service_name }}</td>
+                            <td>{{ item.total_bookings }}</td>
+                            <td>{{ item.total_GBV_INR }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Business Recommendations</h5>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li>Strengthen partnership with GOIBIBO, which generates the highest revenue (₹5.9M) and booking volume (186 bookings).</li>
+                    <li>Investigate why YATRA has significantly higher average booking value than MMT, potentially offering premium travel options.</li>
+                    <li>Consider targeted campaigns to boost MMT bookings and increase their contribution to overall revenue.</li>
+                    <li>Analyze the service features and user experience factors that make GOIBIBO more successful on the platform.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Average Booking Value Comparison</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive"><table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Service Name</th>
+                            <th>Average Booking Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in service_data %}
+                        <tr>
+                            <td>{{ item.service_name }}</td>
+                            <td>₹{{ item.total_GBV_INR|floatformat:2 }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
